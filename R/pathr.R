@@ -80,6 +80,10 @@ path_exists <- function(paths) {
 ##   broken symbolic links. Equivalent to exists() on platforms
 ##   lacking os.lstat().
 
+path_lexists <- function(paths) {
+  path_exists(paths) | path_islink(paths)
+}
+
 ## os.path.expanduser(path)
 ##
 ##   On Unix and Windows, return the argument with an initial
@@ -189,6 +193,19 @@ path_isdir <- function() {
 ##   Return True if path refers to a directory entry that is a
 ##   symbolic link. Always False if symbolic links are not supported
 ##   by the python runtime.
+
+##' @title Test for symlink
+##' @param paths Paths to test
+##' @export
+path_islink <- function(paths) {
+  ## This should be done more following the code here:
+  ##   https://github.com/python-git/python/blob/master/Lib/stat.py
+  islink <- function(x) {
+    info <- Sys.readlink(x)
+    !(is.na(info) | info == "")
+  }
+  na_skip(paths, islink)
+}
 
 ## os.path.ismount(path)
 ##

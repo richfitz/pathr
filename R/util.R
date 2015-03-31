@@ -18,6 +18,20 @@ na_screen <- function(x, screen) {
   x
 }
 
+## This needs generalising to different output types (matrix/vector)
+## and input types (character, other).
+na_skip <- function(x, f, ...) {
+  ok <- !is.na(x)
+  if (all(ok)) {
+    f(x)
+  } else {
+    ret <- f(as.character(x[ok]), ...)
+    i <- rep(NA_integer_, length(x))
+    i[ok] <- seq_len(length(ret))
+    ret[i]
+  }
+}
+
 is_posix <- function() {
   .Platform$OS.type == "unix"
 }
