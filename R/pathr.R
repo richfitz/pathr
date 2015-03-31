@@ -378,3 +378,12 @@ path_isdir <- function() {
 ##   * https://github.com/python-git/python/blob/master/Lib/macpath.py
 ##   * https://github.com/python-git/python/blob/master/Lib/ntpath.py
 ##   * https://github.com/python-git/python/blob/master/Lib/posixpath.py
+
+## Tests are in:
+##   * https://github.com/python-git/python/blob/master/Lib/test/test_genericpath.py
+##   * https://github.com/python-git/python/blob/master/Lib/test/test_macpath.py
+##   * https://github.com/python-git/python/blob/master/Lib/test/test_ntpath.py
+##   * https://github.com/python-git/python/blob/master/Lib/test/test_posixpath.py
+## at a minimum we'll need copies of all Python tests so it's clear
+## the Right Thing is being done in corner cases that the Python
+## people have identified.
