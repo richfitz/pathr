@@ -59,6 +59,9 @@ path_commonprefix <- function(paths) {
 ##   broken symbolic links. On some platforms, this function may
 ##   return False if permission is not granted to execute os.stat() on
 ##   the requested file, even if the path physically exists.
+
+##' @title Test if path exists
+##' @param paths Vector of paths to test
 ##' @export
 path_exists <- function(paths) {
   ## TODO: na.action
@@ -76,7 +79,6 @@ path_exists <- function(paths) {
 ##   Return True if path refers to an existing path. Returns True for
 ##   broken symbolic links. Equivalent to exists() on platforms
 ##   lacking os.lstat().
-
 
 ## os.path.expanduser(path)
 ##

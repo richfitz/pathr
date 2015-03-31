@@ -7,7 +7,7 @@ test_that("basic", {
 })
 
 test_that("Case sensitivity", {
-  ## MAC:
+  ## MAC: -- this will fail on a case-sensitive system (e.g., Linux)
   expect_that(path_exists("Foo"), is_true())
 })
 
@@ -33,8 +33,7 @@ test_that("symlink", {
   new_empty_file("foo")
   on.exit(file_remove("foo"))
   file.symlink("foo", "bar")
-  on.exit(file_remove("bar"), add=TRUE)
-  path_exists("bar")
+  on.exit(file.remove("bar"), add=TRUE)
 })
 
 test_that("Dangling links", {
@@ -43,7 +42,11 @@ test_that("Dangling links", {
 
   new_empty_file("foo")
   file.symlink("foo", "bar")
-  on.exit(file_remove("bar"))
+  expect_that(path_exists(c("foo", "bar")), equals(c(TRUE, TRUE)))
+  on.exit(file.remove("bar")) # won't clear dangling symlinks
   file_remove("foo")
+
+  expect_that(path_exists(c("foo", "bar")), equals(c(FALSE, FALSE)))
+
   expect_that(path_exists("bar"), is_false())
 })
