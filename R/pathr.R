@@ -135,8 +135,8 @@ path_getatime <- function(path) {
 ##
 ##   Changed in version 2.3: If os.stat_float_times() returns True,
 ##   the result is a floating point number.
-path_getatime <- function(path) {
-  os_stat(path)$atime
+path_getmtime <- function(path) {
+  os_stat(path)$mtime
 }
 
 ## os.path.getctime(path)
@@ -147,7 +147,7 @@ path_getatime <- function(path) {
 ##   number giving the number of seconds since the epoch (see the time
 ##   module). Raise os.error if the file does not exist or is
 ##   inaccessible.
-path_getatime <- function(path) {
+path_getctime <- function(path) {
   os_stat(path)$ctime
 }
 
