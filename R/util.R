@@ -63,6 +63,6 @@ is_directory <- function(path) {
   file.info(path)$isdir
 }
 
-startswith <- function(x) {
-  substr(x, 1L, length(x)) == x
+startswith <- function(x, y) {
+  substr(x, 1L, length(x)) == y
 }

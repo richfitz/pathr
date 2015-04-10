@@ -184,7 +184,7 @@ path_isfile <- function(paths) {
 ##   Return True if path is an existing directory. This follows
 ##   symbolic links, so both islink() and isdir() can be true for the
 ##   same path.
-path_isdir <- function() {
+path_isdir <- function(files) {
   os_stat(files)$is_dir
 }
 
@@ -350,10 +350,9 @@ path_islink <- function(paths) {
 ##   re <- sprintf("%s[^%s]*$", x, x)
 ##   regexpr(re, str)
 ## }
-
-.splitext <- function(p, sep, altsep, extsep) {
-  sep_index <- rfind(p, sep)
-}
+## .splitext <- function(p, sep, altsep, extsep) {
+##   sep_index <- rfind(p, sep)
+## }
 
 ## os.path.splitunc(path)
 ##
