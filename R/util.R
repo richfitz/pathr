@@ -21,6 +21,10 @@ na_screen <- function(x, screen) {
 ## This needs generalising to different output types (matrix/vector)
 ## and input types (character, other).
 na_skip <- function(x, f, ...) {
+
+  ## NULL is special, cannot call is.na() on it, gives a warning
+  if (is.null(x)) return(f(x, ...))
+
   ok <- !is.na(x)
   if (all(ok)) {
     f(x)
