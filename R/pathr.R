@@ -167,6 +167,35 @@ path_getsize <- function(files) {
 ##   it begins with a slash, on Windows that it begins with a
 ##   (back)slash after chopping off a potential drive letter.
 
+##' @title Test for absolute path
+##' @export
+path_isabs <- function(path) {
+  if (is_windows()) {
+    win_path_isabs(path)
+  } else {
+    posix_path_isabs(path)
+  }
+}
+
+#' @importFrom rematch re_match
+
+win_path_isabs <- function(path) {
+  device_re <- paste0(
+    "^([a-zA-Z]:|",
+    "[\\\\\\/]{2}[^\\\\\\/]+[\\\\\\/]+[^\\\\\\/]+)?",
+    "([\\\\\\/])?([\\s\\S]*?)$"
+  )
+  result <- re_match(pattern = device_re, text = path)
+  device <- result[, 2]
+  isunc  <- device != "" & substr(device, 2, 2) != ":";
+
+  unname(isunc | result[, 3] != "")
+}
+
+posix_path_isabs <- function(path) {
+  substring(path, 1, 1) == "/"
+}
+
 ## os.path.isfile(path)
 ##
 ##   Return True if path is an existing regular file. This follows
