@@ -2,6 +2,7 @@ context("path_exists")
 
 test_that("basic", {
   new_empty_file("foo")
+  on.exit(file.remove("foo"))
   expect_that(path_exists("foo"), is_true())
   expect_that(path_exists(rep("foo", 4)), equals(rep(TRUE, 4)))
 
@@ -10,9 +11,20 @@ test_that("basic", {
 })
 
 test_that("Case sensitivity", {
-  ## MAC: -- this will fail on a case-sensitive system (e.g., Linux)
-  expect_that(path_exists("Foo"), is_true())
-  expect_that(path_lexists("Foo"), is_true())
+  new_empty_file("foo")
+  on.exit(file.remove("foo"))
+
+  ## See issue #6
+  sysname <- Sys.info()[["sysname"]]
+  if (sysname == "Windows" || sysname == "Darwin") {
+    ## MAC: -- this will fail on a case-sensitive system (e.g., Linux)
+    expect_that(path_exists("Foo"), is_true())
+    expect_that(path_lexists("Foo"), is_true())
+  } else {
+    ## MAC: -- this will fail on a case-sensitive system (e.g., Linux)
+    expect_that(path_exists("Foo"), is_false())
+    expect_that(path_lexists("Foo"), is_false())
+  }
 })
 
 test_that("dots", {
