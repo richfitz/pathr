@@ -68,5 +68,5 @@ is_directory <- function(path) {
 }
 
 startswith <- function(x, y) {
-  substr(x, 1L, length(x)) == y
+  substr(x, 1L, nchar(y)) == y
 }
