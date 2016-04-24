@@ -270,15 +270,6 @@ path_islink <- function(paths) {
 ##   converts the path to lowercase. On Windows, it also converts
 ##   forward slashes to backward slashes.
 
-## os.path.normpath(path)
-##
-##   Normalize a pathname by collapsing redundant separators and
-##   up-level references so that A//B, A/B/, A/./B and A/foo/../B all
-##   become A/B. This string manipulation may change the meaning of a
-##   path that contains symbolic links. On Windows, it converts
-##   forward slashes to backward slashes. To normalize case, use
-##   normcase().
-
 ## os.path.realpath(path)
 ##
 ##   Return the canonical path of the specified filename, eliminating

@@ -70,3 +70,7 @@ is_directory <- function(path) {
 startswith <- function(x, y) {
   substr(x, 1L, nchar(y)) == y
 }
+
+endswith <- function(x, y) {
+  substr(x, nchar(x) - nchar(y) + 1, nchar(x)) == y
+}

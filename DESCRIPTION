@@ -14,3 +14,9 @@ Suggests:
 Imports:
     rematch
 RoxygenNote: 5.0.1.9000
+Collate:
+    'winpath.R'
+    'posixpath.R'
+    'normalize.R'
+    'pathr.R'
+    'util.R'
