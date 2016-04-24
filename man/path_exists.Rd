@@ -9,4 +9,16 @@ path_exists(paths)
 \arguments{
 \item{paths}{Vector of paths to test}
 }
+\value{
+Logical vector.
+}
+\description{
+Returns \code{FALSE} for broken symbolic links. On some platforms, this
+function may return \code{FALSE} if permission is not granted to execute
+the \code{fstat} system call on the requested file, even if the
+path physically exists.
+}
+\examples{
+path_exists(c('/tmp/foobar', tempdir(), NA))
+}
 

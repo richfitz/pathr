@@ -2,8 +2,22 @@
 % Please edit documentation in R/pathr.R
 \name{path_isabs}
 \alias{path_isabs}
-\title{Test for absolute path}
+\title{Test for absolute paths}
 \usage{
 path_isabs(path)
+}
+\arguments{
+\item{path}{Character vector of absolute paths.}
+}
+\value{
+Logical vector.
+}
+\description{
+On Unix, that means it begins with a slash, on Windows that it
+begins with a (back)slash after chopping off a potential drive letter.
+On Windows UNC paths are consideted to be absolute paths.
+}
+\examples{
+path_isabs(c("/foo/bar/", "./relative", "../me/too", "and/me"))
 }
 

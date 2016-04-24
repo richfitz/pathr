@@ -9,4 +9,14 @@ path_islink(paths)
 \arguments{
 \item{paths}{Paths to test}
 }
+\value{
+Logical vector.
+}
+\description{
+Always false if symbolic links are not supported by the platform.
+Returns \code{FALSE} for non-existent paths.
+}
+\examples{
+path_islink(c(tempdir(), "/tmp/foo", NA_character_))
+}
 
