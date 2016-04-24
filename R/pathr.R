@@ -193,7 +193,7 @@ win_path_isabs <- function(path) {
 }
 
 posix_path_isabs <- function(path) {
-  substring(path, 1, 1) == "/"
+  startswith(path, "/")
 }
 
 ## os.path.isfile(path)
