@@ -15,6 +15,7 @@ Imports:
     rematch
 RoxygenNote: 5.0.1.9000
 Collate:
+    'abspath.R'
     'winpath.R'
     'posixpath.R'
     'normalize.R'
