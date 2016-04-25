@@ -19,6 +19,6 @@ most platforms, this is equivalent to calling the function
 \code{path_norm(file.path(getwd(), path))}.
 }
 \examples{
-path_absolute(c("foo/bar", "foo/..", "/root/dir"))
+path_abs(c("foo/bar", "foo/..", "/root/dir"))
 }
 

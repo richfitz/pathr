@@ -11,7 +11,7 @@
 ##'
 ##' @export
 ##' @examples
-##' path_absolute(c("foo/bar", "foo/..", "/root/dir"))
+##' path_abs(c("foo/bar", "foo/..", "/root/dir"))
 
 path_abs <- function(path) {
   res <- path
