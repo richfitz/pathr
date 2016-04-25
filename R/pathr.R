@@ -53,16 +53,20 @@ path_commonprefix <- function(paths) {
 ##   element of the pair returned by passing path to the function
 ##   split().
 
-## os.path.exists(path) -- genericpath.py
-##
-##   Return True if path refers to an existing path. Returns False for
-##   broken symbolic links. On some platforms, this function may
-##   return False if permission is not granted to execute os.stat() on
-##   the requested file, even if the path physically exists.
-
-##' @title Test if path exists
+##' Test if path exists
+##'
+##' Returns \code{FALSE} for broken symbolic links. On some platforms, this
+##' function may return \code{FALSE} if permission is not granted to execute
+##' the \code{fstat} system call on the requested file, even if the
+##' path physically exists.
+##'
 ##' @param paths Vector of paths to test
+##' @return Logical vector.
+##'
 ##' @export
+##' @examples
+##' path_exists(c('/tmp/foobar', tempdir(), NA))
+
 path_exists <- function(paths) {
   ## TODO: na.action
   ##       - omit
@@ -161,14 +165,19 @@ path_getsize <- function(files) {
   os_stat(files)$size
 }
 
-## os.path.isabs(path)
-##
-##   Return True if path is an absolute pathname. On Unix, that means
-##   it begins with a slash, on Windows that it begins with a
-##   (back)slash after chopping off a potential drive letter.
-
-##' @title Test for absolute path
+##' Test for absolute paths
+##'
+##' On Unix, that means it begins with a slash, on Windows that it
+##' begins with a (back)slash after chopping off a potential drive letter.
+##' On Windows UNC paths are consideted to be absolute paths.
+##'
+##' @param path Character vector of absolute paths.
+##' @return Logical vector.
+##'
 ##' @export
+##' @examples
+##' path_isabs(c("/foo/bar/", "./relative", "../me/too", "and/me"))
+
 path_isabs <- function(path) {
   if (is_windows()) {
     win_path_isabs(path)
@@ -217,15 +226,18 @@ path_isdir <- function(files) {
   os_stat(files)$is_dir
 }
 
-## os.path.islink(path)
-##
-##   Return True if path refers to a directory entry that is a
-##   symbolic link. Always False if symbolic links are not supported
-##   by the python runtime.
-
-##' @title Test for symlink
+##' Test for symlink
+##'
+##' Always false if symbolic links are not supported by the platform.
+##' Returns \code{FALSE} for non-existent paths.
+##'
 ##' @param paths Paths to test
+##' @return Logical vector.
+##'
 ##' @export
+##' @examples
+##' path_islink(c(tempdir(), "/tmp/foo", NA_character_))
+
 path_islink <- function(paths) {
   ## This should be done more following the code here:
   ##   https://github.com/python-git/python/blob/master/Lib/stat.py
