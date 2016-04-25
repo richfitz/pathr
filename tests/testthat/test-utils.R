@@ -94,3 +94,22 @@ test_that("endswith", {
   }
 
 })
+
+test_that("common_prefix", {
+
+  ll <- function(x) strsplit(x, "")[[1]]
+
+  cases <- list(
+    c("/home/swenson/spam", "/home/swen/spam", "/home/swen"),
+    c("/home/swen/spam", "/home/swen/eggs", "/home/swen/"),
+    c("/home/swen/spam", "/home/swen/spam", "/home/swen/spam"),
+    c("home:swenson:spam", "home:swen:spam", "home:swen"),
+    c(":home:swen:spam", ":home:swen:eggs", ":home:swen:"),
+    c(":home:swen:spam", ":home:swen:spam", ":home:swen:spam")
+  )
+
+  for (case in cases) {
+    expect_equal(common_prefix(ll(case[1]), ll(case[2])), ll(case[[3]]))
+  }
+
+})

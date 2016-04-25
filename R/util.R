@@ -74,3 +74,32 @@ startswith <- function(x, y) {
 endswith <- function(x, y) {
   substr(x, nchar(x) - nchar(y) + 1, nchar(x)) == y
 }
+
+drop_empty <- function(x) {
+  x [ x != "" ]
+}
+
+##' The longest prefix of both lists
+##'
+##' @param x First list.
+##' @param y Second list.
+##' @return List, longest common prefix of both.
+##'
+##' @keywords internal
+
+common_prefix <- function(x, y) {
+
+  ## l1 is the shorter list
+  if (length(x) > length(y)) {
+    l1 <- y
+    l2 <- x
+  } else {
+    l1 <- x
+    l2 <- y
+  }
+
+  for (i in seq_along(l1)) {
+    if (!identical(l1[[i]], l2[[i]])) return(head(l1, i - 1))
+  }
+  l1
+}
