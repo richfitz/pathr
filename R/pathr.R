@@ -14,12 +14,6 @@
 
 ## https://docs.python.org/2/library/os.path.html
 
-## os.path.abspath(path)
-##
-##   Return a normalized absolutized version of the pathname path. On
-##   most platforms, this is equivalent to calling the function
-##   normpath() as follows: normpath(join(os.getcwd(), path)).
-
 ## os.path.basename(path)
 ##
 ##   Return the base name of pathname path. This is the second element
