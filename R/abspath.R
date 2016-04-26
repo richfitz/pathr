@@ -16,8 +16,11 @@
 path_abs <- function(path) {
   res <- path
 
+  na  <- is.na(path)
   abs <- path_isabs(path)
-  res[!abs] <- file.path(getwd(), path[!abs])
+  res[!abs & !na] <- file.path(getwd(), path[!abs & !na])
 
-  path_norm(res)
+  res[!na] <- path_norm(res[!na])
+
+  res
 }
