@@ -282,18 +282,6 @@ path_islink <- function(paths) {
 ##   any symbolic links encountered in the path (if they are supported
 ##   by the operating system).
 
-## os.path.relpath(path[, start])
-##
-##   Return a relative filepath to path either from the current
-##   directory or from an optional start directory. This is a path
-##   computation: the filesystem is not accessed to confirm the
-##   existence or nature of path or start.
-##
-##   start defaults to os.curdir.
-##
-##   Availability: Windows, Unix.
-##
-
 ## os.path.samefile(path1, path2)
 ##
 ##   Return True if both pathname arguments refer to the same file or

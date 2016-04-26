@@ -20,4 +20,5 @@ Collate:
     'posixpath.R'
     'normalize.R'
     'pathr.R'
+    'relpath.R'
     'util.R'
