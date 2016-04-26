@@ -2,6 +2,7 @@
 
 export(path_abs)
 export(path_basename)
+export(path_dirname)
 export(path_exists)
 export(path_isabs)
 export(path_islink)

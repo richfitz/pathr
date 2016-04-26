@@ -25,4 +25,7 @@ i.e. \code{os.path.basename('/foo/bar/')} is \code{''}. In R
 \examples{
 path_basename(c("/foo/bar", "/foo/bar/", ".", "foo/bar.c"))
 }
+\seealso{
+\code{\link{path_dirname}}
+}
 

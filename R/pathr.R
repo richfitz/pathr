@@ -27,6 +27,8 @@
 ##' @param path Character vector of paths.
 ##' @return Character vector of base names.
 ##'
+##' @seealso \code{\link{path_dirname}}
+##'
 ##' @export
 ##' @examples
 ##' path_basename(c("/foo/bar", "/foo/bar/", ".", "foo/bar.c"))
@@ -35,11 +37,24 @@ path_basename <- function(path) {
   base::basename(path)
 }
 
-## os.path.dirname(path)
-##
-##   Return the directory name of pathname path. This is the first
-##   element of the pair returned by passing path to the function
-##   split().
+##' Directory name of a path
+##'
+##' Return the directory name of pathname path.
+##' The result is the same as for \code{\link[base]{dirname}},
+##' and this function is only included here for completeness.
+##'
+##' @param path Character vector of paths.
+##' @return Character vector of directory names.
+##'
+##' @seealso \code{\link{path_basename}}
+##'
+##' @export
+##' @examples
+##' path_dirname(c("/foo/bar", "/foo/bar/", ".", "foo/bar.c", "~"))
+
+path_dirname <- function(path) {
+  base::dirname(path)
+}
 
 ##' Test if path exists
 ##'
