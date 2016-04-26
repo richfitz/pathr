@@ -21,7 +21,9 @@ test_that("posix_path_rel", {
     list(c("/foo/bar/bat", "/x"), "../foo/bar/bat"),
     list(c("/", "/"), "."),
     list(c("/a", "/a"), "."),
-    list(c("/a/b", "/a/b"), ".")
+    list(c("/a/b", "/a/b"), "."),
+    list(list(c(NA, "a"), "."), c(NA, "a")),
+    list(c("a", NA), NA_character_)
   )
 
   for (case in cases) {
@@ -52,7 +54,9 @@ test_that("win_path_rel", {
     list(c("/", "/"), "."),
     list(c("/a", "/a"), "."),
     list(c("/a/b", "/a/b"), "."),
-    list(c("c:/foo", "C:/FOO"), ".")
+    list(c("c:/foo", "C:/FOO"), "."),
+    list(list(c(NA, "a"), "."), c(NA, "a")),
+    list(c("a", NA), NA_character_)
   )
 
   wd <- gsub("/", "\\", fixed = TRUE, getwd())

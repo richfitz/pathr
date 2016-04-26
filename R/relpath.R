@@ -18,7 +18,10 @@
 ##' path_rel("./bar/foo/bar", "../../")
 
 path_rel <- function(path, start = ".") {
-  if (is_windows()) {
+  stopifnot(length(start) == 1)
+  if (is.na(start)) {
+    rep(NA_character_, length(path))
+  } else if (is_windows()) {
     win_path_rel(path, start)
   } else {
     posix_path_rel(path, start)
@@ -26,12 +29,17 @@ path_rel <- function(path, start = ".") {
 }
 
 posix_path_rel <- function(path, start = ".") {
-  stopifnot(length(start) == 1)
-  start <- drop_empty(strsplit(path_abs(start), "/")[[1]])
-  vapply(path, posix_path_rel1, "", start = start, USE.NAMES = FALSE)
+  if (is.na(start)) {
+    rep(NA_character_, length(path))
+  } else {
+    start <- drop_empty(strsplit(path_abs(start), "/")[[1]])
+    vapply(path, posix_path_rel1, "", start = start, USE.NAMES = FALSE)
+  }
 }
 
 posix_path_rel1 <- function(path1, start) {
+
+  if (is.na(path1)) return(NA_character_)
 
   path1 <- drop_empty(strsplit(path_abs(path1), "/")[[1]])
 
@@ -50,12 +58,18 @@ posix_path_rel1 <- function(path1, start) {
 }
 
 win_path_rel <- function(path, start = ".") {
-  stopifnot(length(start) == 1)
-  start <- path_abs(win_path_norm(start))
-  vapply(path, win_path_rel1, "", start = start, USE.NAMES = FALSE)
+  if (is.na(start)) {
+    rep(NA_character_, length(path))
+  } else {
+    start <- path_abs(win_path_norm(start))
+    vapply(path, win_path_rel1, "", start = start, USE.NAMES = FALSE)
+  }
 }
 
 win_path_rel1 <- function(path1, start) {
+
+  if (is.na(path1)) return(NA_character_)
+
   sstart <- path_split_drive(start)
   start_drive <- sstart[[1]][1]
   start_rest <- sstart[[1]][2]
