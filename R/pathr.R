@@ -14,19 +14,47 @@
 
 ## https://docs.python.org/2/library/os.path.html
 
-## os.path.basename(path)
-##
-##   Return the base name of pathname path. This is the second element
-##   of the pair returned by passing path to the function
-##   split(). Note that the result of this function is different from
-##   the Unix basename program; where basename for '/foo/bar/' returns
-##   'bar', the basename() function returns an empty string ('').
+##' Base name of pathname path
+##'
+##' The result is the same as for \code{\link[base]{basename}},
+##' and this function is only included here for completeness.
+##'
+##' Note that this is different from the Python \code{os.path.basename}
+##' function, Python always returns a file name or an empty string,
+##' i.e. \code{os.path.basename('/foo/bar/')} is \code{''}. In R
+##' \code{path_basename("/foo/bar/")} is \code{"bar"}.
+##'
+##' @param path Character vector of paths.
+##' @return Character vector of base names.
+##'
+##' @seealso \code{\link{path_dirname}}
+##'
+##' @export
+##' @examples
+##' path_basename(c("/foo/bar", "/foo/bar/", ".", "foo/bar.c"))
 
-## os.path.dirname(path)
-##
-##   Return the directory name of pathname path. This is the first
-##   element of the pair returned by passing path to the function
-##   split().
+path_basename <- function(path) {
+  base::basename(path)
+}
+
+##' Directory name of a path
+##'
+##' Return the directory name of pathname path.
+##' The result is the same as for \code{\link[base]{dirname}},
+##' and this function is only included here for completeness.
+##'
+##' @param path Character vector of paths.
+##' @return Character vector of directory names.
+##'
+##' @seealso \code{\link{path_basename}}
+##'
+##' @export
+##' @examples
+##' path_dirname(c("/foo/bar", "/foo/bar/", ".", "foo/bar.c", "~"))
+
+path_dirname <- function(path) {
+  base::dirname(path)
+}
 
 ##' Test if path exists
 ##'
