@@ -22,25 +22,6 @@
 ##   the Unix basename program; where basename for '/foo/bar/' returns
 ##   'bar', the basename() function returns an empty string ('').
 
-## os.path.commonprefix(list)
-##
-##   Return the longest path prefix (taken character-by-character)
-##   that is a prefix of all paths in list. If list is empty, return
-##   the empty string (''). Note that this may return invalid paths
-##   because it works a character at a time.
-path_commonprefix <- function(paths) {
-  if (length(paths) == 0L) {
-    ""
-  } else {
-    ## s1 = min(m)
-    ## s2 = max(m)
-    ## for i, c in enumerate(s1):
-    ##     if c != s2[i]:
-    ##         return s1[:i]
-    ## return s1
-  }
-}
-
 ## os.path.dirname(path)
 ##
 ##   Return the directory name of pathname path. This is the first
@@ -281,18 +262,6 @@ path_islink <- function(paths) {
 ##   Return the canonical path of the specified filename, eliminating
 ##   any symbolic links encountered in the path (if they are supported
 ##   by the operating system).
-
-## os.path.relpath(path[, start])
-##
-##   Return a relative filepath to path either from the current
-##   directory or from an optional start directory. This is a path
-##   computation: the filesystem is not accessed to confirm the
-##   existence or nature of path or start.
-##
-##   start defaults to os.curdir.
-##
-##   Availability: Windows, Unix.
-##
 
 ## os.path.samefile(path1, path2)
 ##
