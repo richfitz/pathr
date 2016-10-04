@@ -9,7 +9,7 @@ os_stat <- function(files) {
     m <- file.info(as.character(files[ok]))
     i <- rep(NA_integer_, length(files))
     i[ok] <- seq_len(nrow(m))
-    m[i,]
+    m[i, ]
   }
 }
 
@@ -44,16 +44,20 @@ is_windows <- function() {
   Sys.info()[["sysname"]] == "Windows"
 }
 
+is_darwin <- function() {
+  Sys.info()[["sysname"]] == "Darwin"
+}
+
 ## TODO: Add warn=FALSE as default.
 ## TODO: vectorise.
-file_remove <- function(path, recursive=FALSE) {
+file_remove <- function(path, recursive = FALSE) {
   exists <- file.exists(path)
   if (exists) {
     if (is_directory(path)) {
       if (recursive) {
         unlink(path, recursive)
       } else {
-        stop("Use 'recursive=TRUE' to delete directories")
+        stop("Use 'recursive = TRUE' to delete directories")
       }
     } else {
       file.remove(path)
@@ -64,7 +68,7 @@ file_remove <- function(path, recursive=FALSE) {
 
 ## TODO: This becomes path_isdir(), or at least aliased to it.
 is_directory <- function(path) {
-  file.info(path)$isdir
+  file.info(path, extra_cols = FALSE)$isdir
 }
 
 startswith <- function(x, y) {
@@ -72,11 +76,12 @@ startswith <- function(x, y) {
 }
 
 endswith <- function(x, y) {
-  substr(x, nchar(x) - nchar(y) + 1, nchar(x)) == y
+  nx <- nchar(x)
+  substr(x, nx - nchar(y) + 1L, nx) == y
 }
 
 drop_empty <- function(x) {
-  x [ x != "" ]
+  x[nzchar(x)]
 }
 
 ##' The longest prefix of both lists
@@ -106,4 +111,8 @@ common_prefix <- function(x, y) {
 
 normcase <- function(x) {
   tolower(gsub("/", "\\", fixed = TRUE, x))
+}
+
+vcapply <- function(X, FUN, ...) {
+  vapply(X, FUN, character(1), ...)
 }

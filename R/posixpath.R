@@ -21,7 +21,11 @@ posix_devnull <- '/dev/null'
 ##   however, other normalizations (such as optimizing '../' away) are
 ##   not allowed (another function should be defined to do that).
 posix_path_normcase <- function(path) {
-  path
+  if (is_darwin()) {
+    tolower(path)
+  } else {
+    path
+  }
 }
 
 ## os.path.join(path, *paths)

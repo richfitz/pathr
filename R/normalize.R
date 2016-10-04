@@ -1,7 +1,3 @@
-
-#' @include posixpath.R winpath.R
-NULL
-
 ##' Normalize a pathname
 ##'
 ##' Normalize a pathname by collapsing redundant separators and
@@ -27,11 +23,11 @@ path_norm <- function(path) {
 }
 
 win_path_norm <- function(path) {
-  vapply(path, win_path_norm1, "", USE.NAMES = FALSE)
+  vcapply(path, win_path_norm1, USE.NAMES = FALSE)
 }
 
 posix_path_norm <- function(path) {
-  vapply(path, posix_path_norm1, "", USE.NAMES = FALSE)
+  vcapply(path, posix_path_norm1, USE.NAMES = FALSE)
 }
 
 posix_path_norm1 <- function(path1) {

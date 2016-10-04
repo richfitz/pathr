@@ -10,7 +10,6 @@
 ##' @param start Start directory, character scalar. Defaults to
 ##'   the current working directory.
 ##'
-##' @include posixpath.R
 ##' @export
 ##' @examples
 ##' path_rel("./bar/foo/bar", "/")

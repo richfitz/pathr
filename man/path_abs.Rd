@@ -18,6 +18,10 @@ most platforms, this is equivalent to calling the function
 \code{\link{path_norm}} as follows:
 \code{path_norm(file.path(getwd(), path))}.
 }
+\details{
+Note that unlike \code{\link{normalizePath}}, the absolute path
+need not exist yet.
+}
 \examples{
 path_abs(c("foo/bar", "foo/..", "/root/dir"))
 }
