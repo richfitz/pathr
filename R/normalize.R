@@ -81,9 +81,9 @@ win_path_norm1 <- function(path1) {
       startswith(path1, "\\\\?\\")) return(path1)
 
   path1 <- gsub("/", "\\", path1, fixed = TRUE)
-  spl <- path_split_drive1(path1)
-  prefix <- spl[1]
-  path1 <- spl[2]
+  spl <- windows_path_split_drive(path1)
+  prefix <- spl[[1]]
+  path1 <- spl[[2]]
 
   ## Collapse initial backslashes
   if (startswith(path1, "\\")) {
@@ -118,54 +118,4 @@ win_path_norm1 <- function(path1) {
   if (prefix == "" && length(comps) == 0) comps <- "."
 
   paste0(prefix, paste(unlist(comps), collapse = "\\"))
-}
-
-##' Split a pathname into drive/UNC sharepoint and relative path specifiers
-##'
-##' Returns a list with 2 element character vectors: drive/UNC and path,
-##' either part may be empty string.
-##'
-##' It always holds that \code{paste0(output[1], output[2]) == input}.
-##'
-##' If the path contained a drive letter, the drive/UNC part will contain
-##' everything up to and including the colon. E.g.
-##' \code{path_split_drive("c:/dir")} returns \code{list(c("c:", "/dir"))}.
-##'
-##' If the path contained a UNC path, the drive/UNC will contain the host
-##' name and share up to but not including the fourth directory separator
-##' character. E.g. \code{path_split_drive("//host/computer/dir")} returns
-##' \code{list(c("//host/computer", "/dir"))}.
-##'
-##' Paths cannot contain both a drive letter and a UNC path.
-##'
-##' @param path Character vector.
-##' @return List of character vectors of length two. The first elements
-##'   contain the drive letters or UNC paths, the second elements the
-##'   relative paths.
-##'
-##' @export
-##' @examples
-##' path_split_drive(c("c:/Rtools/bin", "\\\\machine\\share\\folder"))
-
-path_split_drive <- function(path) {
-  lapply(path, path_split_drive1)
-}
-
-path_split_drive1 <- function(path1) {
-  npath1 <- gsub("/", "\\", path1, fixed = TRUE)
-  if (startswith(npath1, "\\\\") && substr(npath1, 3, 3) != "\\") {
-    if (grepl("^\\\\\\\\[^\\\\]+\\\\[^\\\\]+.*$", npath1)) {
-      nunc <- sub("^(\\\\\\\\[^\\\\]+\\\\[^\\\\]+).*$", "\\1", npath1)
-    } else {
-      nunc <- ""
-    }
-    c(substr(path1, 1, nchar(nunc)),
-      substr(path1, nchar(nunc) + 1, nchar(path1)))
-
-  } else if (substr(npath1, 2, 2) == ":") {
-    c(substr(path1, 1, 2), substr(path1, 3, nchar(path1)))
-
-  } else {
-    c("", path1)
-  }
 }

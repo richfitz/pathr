@@ -69,14 +69,14 @@ win_path_rel1 <- function(path1, start) {
 
   if (is.na(path1)) return(NA_character_)
 
-  sstart <- path_split_drive(start)
-  start_drive <- sstart[[1]][1]
-  start_rest <- sstart[[1]][2]
+  sstart <- windows_path_split_drive(start)
+  start_drive <- sstart[[1]]
+  start_rest <- sstart[[2]]
 
   path1 <- path_abs(win_path_norm(path1))
-  spath1 <- path_split_drive(path1)
-  path1_drive <- spath1[[1]][1]
-  path1_rest <- spath1[[1]][2]
+  spath1 <- windows_path_split_drive(path1)
+  path1_drive <- spath1[[1]]
+  path1_rest <- spath1[[2]]
 
   if (normcase(start_drive) != normcase(path1_drive)) {
     stop(sprintf(
