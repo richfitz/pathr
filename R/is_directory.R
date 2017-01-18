@@ -1,5 +1,5 @@
 ##' Test if a path is a directory.  This follows symbolic links, so
-##' both \code{\path{path_is_link}} and \code{path_is_directory} can
+##' both \code{\link{path_is_link}} and \code{path_is_directory} can
 ##' be \code{TRUE} for the same oath on systems that support symlinks
 ##'
 ##' @title Test if a path is a directory
