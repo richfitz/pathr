@@ -116,3 +116,15 @@ normcase <- function(x) {
 vcapply <- function(X, FUN, ...) {
   vapply(X, FUN, character(1), ...)
 }
+
+find_last_sep <- function(path, posix = TRUE, missing = 0) {
+  re <- if (posix) ".*/(?!/)" else stop("FIXME")
+  i <- regexpr(re, path, perl = TRUE)
+  ret <- attr(i, "match.length")
+  ret[i == -1] <- missing
+  ret
+}
+
+strip_trailing_slash <- function(x) {
+  sub("(?<=[^/])/+$", "", x, perl = TRUE)
+}

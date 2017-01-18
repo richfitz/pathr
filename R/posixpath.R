@@ -67,15 +67,12 @@ posix_path_normcase <- function(path) {
 ## }
 ##
 ## This one is nasty to deal with recycling; need to check this
-## carefully
-
-
-## from posixpath.py:
+## carefully.
 ##
-##   Split a path in head (everything up to the last '/') and tail
-##   (the rest).  If the path ends in '/', tail will be empty.  If
-##   there is no '/' in the path, head will be empty.  Trailing '/'es
-##   are stripped from head unless it is the root.
-posix_path_split <- function(paths) {
+## An NA in any component should render all paths missing
 
+
+
+posix_path_is_abs <- function(path) {
+  substr(path, 1, 1) == "/"
 }

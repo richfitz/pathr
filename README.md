@@ -60,3 +60,5 @@ Every file should have a section indicating which python function they are desce
 ## Other
 
 * abbreviations (dir, norm, rel) or full words (directory, normalise, relative); all the functions should have the same approach here
+* organisation of the posix code - at present things slightly mimic the python version, but I'm going to roll the posix/windows bit together and split by function instead I think
+* harmonise treatment of NA values.  There are two approaches scattered through the functions - using `na_skip` which splits the processing into NA bits and non-NA bits, and manual indexing.  I'd be surprised if there was a big speed difference between the two approaches but it's not clear which is easier to understand.
