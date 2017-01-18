@@ -168,46 +168,6 @@ path_getsize <- function(files) {
   os_stat(files)$size
 }
 
-##' Test for absolute paths
-##'
-##' On Unix, that means it begins with a slash, on Windows that it
-##' begins with a (back)slash after chopping off a potential drive letter.
-##' On Windows UNC paths are consideted to be absolute paths.
-##'
-##' @param path Character vector of absolute paths.
-##' @return Logical vector.
-##'
-##' @export
-##' @examples
-##' path_isabs(c("/foo/bar/", "./relative", "../me/too", "and/me"))
-
-path_isabs <- function(path) {
-  if (is_windows()) {
-    win_path_isabs(path)
-  } else {
-    posix_path_isabs(path)
-  }
-}
-
-#' @importFrom rematch re_match
-
-win_path_isabs <- function(path) {
-  device_re <- paste0(
-    "^([a-zA-Z]:|",
-    "[\\\\\\/]{2}[^\\\\\\/]+[\\\\\\/]+[^\\\\\\/]+)?",
-    "([\\\\\\/])?([\\s\\S]*?)$"
-  )
-  result <- re_match(pattern = device_re, text = path)
-  device <- result[, 2]
-  isunc  <- device != "" & substr(device, 2, 2) != ":";
-
-  unname(isunc | result[, 3] != "")
-}
-
-posix_path_isabs <- function(path) {
-  startswith(path, "/")
-}
-
 ## os.path.isfile(path)
 ##
 ##   Return True if path is an existing regular file. This follows

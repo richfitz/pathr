@@ -15,7 +15,6 @@
 ##' path_rel("./bar/foo/bar", "/")
 ##' path_rel("./bar/foo/bar", "bar/baz/ize")
 ##' path_rel("./bar/foo/bar", "../../")
-
 path_rel <- function(path, start = ".") {
   stopifnot(length(start) == 1)
   if (is.na(start)) {

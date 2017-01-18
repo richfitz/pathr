@@ -1,4 +1,3 @@
-
 context("path_rel")
 
 test_that("posix_path_rel", {

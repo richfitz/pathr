@@ -15,6 +15,9 @@
 ##' path_norm(c("A//B", "A/B/", "A/./B", "A/foo/../B"))
 
 path_norm <- function(path) {
+  ## Something like passing in windows = NULL and testing windows %||%
+  ## is_windows() would allow for more easily simulating different
+  ## path access on different platforms.
   if (is_windows()) {
     win_path_norm(path)
   } else {

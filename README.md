@@ -11,7 +11,7 @@ Then there are things like `commonprefix` that are basically broken in Python th
 The names here (immediately by the checkboxes) are the python names for the functions
 
 * [ ] `normcase`
-* [ ] `isabs`
+* [x] `isabs` - as `path_is_abs`
 * [ ] `join`
 * [x] `splitdrive` - as `path_split_drive`
 * [ ] `split `
