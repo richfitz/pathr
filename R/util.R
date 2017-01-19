@@ -53,7 +53,7 @@ is_darwin <- function() {
 file_remove <- function(path, recursive = FALSE) {
   exists <- file.exists(path)
   if (exists) {
-    if (is_directory(path)) {
+    if (path_is_directory(path)) {
       if (recursive) {
         unlink(path, recursive)
       } else {
@@ -64,11 +64,6 @@ file_remove <- function(path, recursive = FALSE) {
     }
   }
   invisible(exists)
-}
-
-## TODO: This becomes path_isdir(), or at least aliased to it.
-is_directory <- function(path) {
-  file.info(path, extra_cols = FALSE)$isdir
 }
 
 startswith <- function(x, y) {

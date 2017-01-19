@@ -16,18 +16,18 @@ The names here (immediately by the checkboxes) are the python names for the func
 * [x] `splitdrive` - as `path_split_drive`
 * [ ] `split `
 * [ ] `splitext`
-* [ ] `basename`
-* [ ] `dirname`
+* [x] `basename` - as `path_basename` (trivial)
+* [x] `dirname` - as `path_dirname` (trivial)
 * [ ] `commonprefix`
-* [ ] `getsize`
-* [ ] `getmtime`
-* [ ] `getatime`
-* [ ] `getctime`
-* [ ] `islink`
-* [ ] `exists`
-* [ ] `lexists`
+* [x] `getsize` - as `path_getsize` (consider rename)
+* [x] `getmtime` - as `path_getmtime` (consider rename)
+* [x] `getatime` - as `path_getatime` (consider rename)
+* [x] `getctime` - as `path_getctime` (consider rename)
+* [x] `islink` - as `path_is_link`
+* [x] `exists` - as `path_exists`
+* [x] `lexists` - as `path_lexists`
 * [x] `isdir` - as `path_is_directory`
-* [ ] `isfile`
+* [x] `isfile` - as `path_is_file`
 * [ ] `ismount`
 * [ ] `walk`
 * [ ] `expanduser`
@@ -60,5 +60,9 @@ Every file should have a section indicating which python function they are desce
 ## Other
 
 * abbreviations (dir, norm, rel) or full words (directory, normalise, relative); all the functions should have the same approach here
+  - path_rel
+  - path_lexists
+  - path_dirname
 * organisation of the posix code - at present things slightly mimic the python version, but I'm going to roll the posix/windows bit together and split by function instead I think
+  - changed tack here and started splitting things out by function.  This leads to a cluttered R/ directory but is helping me work out what is what.  These are likely to get joined together in the medium term
 * harmonise treatment of NA values.  There are two approaches scattered through the functions - using `na_skip` which splits the processing into NA bits and non-NA bits, and manual indexing.  I'd be surprised if there was a big speed difference between the two approaches but it's not clear which is easier to understand.  For functions that return lists rather than vectors, the NA handling needs to be quite different.
