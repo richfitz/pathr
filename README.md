@@ -30,13 +30,20 @@ The names here (immediately by the checkboxes) are the python names for the func
 * [x] `isfile` - as `path_is_file`
 * [ ] `ismount`
 * [ ] `walk`
-* [ ] `expanduser`
+* [x] `expanduser` - as `path_expand_user` (simple)
 * [ ] `expandvars`
 * [x] `normpath` - as `path_norm`
 * [x] `abspath` - as `path_abs`
 * [ ] `samefile`
 * [ ] `sameopenfile`
 * [ ] `samestat`
+* [ ] `realpath`
+* [ ] `supports_unicode_filenames`
+* [x] `relpath` - as `path_rel`
+* [ ] `splitunc`
+
+The python module also provides constants
+
 * [ ] `curdir`
 * [ ] `pardir`
 * [ ] `sep`
@@ -45,9 +52,8 @@ The names here (immediately by the checkboxes) are the python names for the func
 * [ ] `altsep`
 * [ ] `extsep`
 * [ ] `devnull`
-* [ ] `realpath`
-* [ ] `supports_unicode_filenames`
-* [x] `relpath` - as `path_rel`
+
+But it's not clear how these should be provided.  I'd think that upper-case would be more typical for R? (e.g., pathr::CURDIR)
 
 ## Design
 

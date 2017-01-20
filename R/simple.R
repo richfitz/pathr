@@ -88,3 +88,18 @@ path_getctime <- function(path) {
 path_getsize <- function(files) {
   os_stat(files)$size
 }
+
+## Expand paths beginning with '~' or '~user'.
+## '~' means $HOME; '~user' means that user's home directory.
+## If the path doesn't begin with '~', or if the user or $HOME is unknown,
+## the path is returned unchanged (leaving error reporting to whatever
+## function is called with the expanded path as argument).
+## See also module 'glob' for expansion of *, ? and [...] in pathnames.
+## (A function should also be defined to do full *sh-style environment
+## variable expansion.)
+##
+## NOTE: this is done with path.expand(), which might not work
+## correctly on all unix platforms
+path_expand_user <- function(path) {
+  na_skip(path, expand.path)
+}
