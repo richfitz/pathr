@@ -123,3 +123,15 @@ find_last_sep <- function(path, posix = TRUE, missing = 0) {
 strip_trailing_slash <- function(x) {
   sub("(?<=[^/])/+$", "", x, perl = TRUE)
 }
+
+reasonable_path <- function(path) {
+  if (is.character(path)) {
+    path
+  } else if (is.null(path)) {
+    character(0)
+  } else if (all(is.na(path))) {
+    rep(NA_character_, length(path))
+  } else {
+    stop("Invalid input for path")
+  }
+}

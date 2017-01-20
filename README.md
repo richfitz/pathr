@@ -29,9 +29,9 @@ The names here (immediately by the checkboxes) are the python names for the func
 * [x] `isdir` - as `path_is_directory`
 * [x] `isfile` - as `path_is_file`
 * [ ] `ismount`
-* [ ] `walk`
+* [ ] `walk` (deprecated in python3 in favour of os.walk)
 * [x] `expanduser` - as `path_expand_user` (simple)
-* [ ] `expandvars`
+* [x] `expandvars` - as `path_expand_vars`
 * [x] `normpath` - as `path_norm`
 * [x] `abspath` - as `path_abs`
 * [ ] `samefile`
@@ -69,6 +69,8 @@ Every file should have a section indicating which python function they are desce
   - path_rel
   - path_lexists
   - path_dirname
+  - path_expand_vars (variables?, envvar?)
 * organisation of the posix code - at present things slightly mimic the python version, but I'm going to roll the posix/windows bit together and split by function instead I think
   - changed tack here and started splitting things out by function.  This leads to a cluttered R/ directory but is helping me work out what is what.  These are likely to get joined together in the medium term
 * harmonise treatment of NA values.  There are two approaches scattered through the functions - using `na_skip` which splits the processing into NA bits and non-NA bits, and manual indexing.  I'd be surprised if there was a big speed difference between the two approaches but it's not clear which is easier to understand.  For functions that return lists rather than vectors, the NA handling needs to be quite different.
+* distinguish between functions that *only* run on windows/unix (i.e., that use underlying filesystem tools) and functions that do path computations following windows/unix conventions.  The latter will be restricted by platform, the former should be available on other platforms
