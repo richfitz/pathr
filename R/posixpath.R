@@ -6,6 +6,7 @@ posix_pathsep <- ':'
 posix_defpath <- ':/bin:/usr/bin'
 posix_altsep <- NULL
 posix_devnull <- '/dev/null'
+posix_supports_unicode_filenames <- FALSE
 
 ## os.path.normcase(path)
 ##
