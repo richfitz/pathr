@@ -108,6 +108,9 @@ normcase <- function(x) {
   tolower(gsub("/", "\\", fixed = TRUE, x))
 }
 
+vlapply <- function(X, FUN, ...) {
+  vapply(X, FUN, logical(1), ...)
+}
 vcapply <- function(X, FUN, ...) {
   vapply(X, FUN, character(1), ...)
 }
