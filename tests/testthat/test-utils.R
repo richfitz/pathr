@@ -113,3 +113,33 @@ test_that("common_prefix", {
   }
 
 })
+
+test_that("regexp_find_all", {
+  expect_equal(regexp_find_all("/+", "foo"),
+               list(start = integer(0), length = integer(0)))
+  expect_equal(regexp_find_all("/+", "/foo"),
+               list(start = 1L, length = 1L))
+  expect_equal(regexp_find_all("/+", "/foo/"),
+               list(start = c(1L, 5L), length = c(1L, 1L)))
+  expect_equal(regexp_find_all("/+", "/foo/bar"),
+               list(start = c(1L, 5L), length = c(1L, 1L)))
+  expect_equal(regexp_find_all("/+", "foo/bar"),
+               list(start = 4L, length = 1L))
+  expect_equal(regexp_find_all("/+", "aa/bbbb//cccc/d"),
+               list(start = c(3, 8, 14), length = c(1L, 2L, 1L)))
+  expect_equal(regexp_find_all("/", "aa/bbbb//cccc/d"),
+               list(start = c(3, 8, 9, 14), length = c(1L, 1L, 1L, 1L)))
+
+
+  ## Here's a little case that fails nicely; there's an off-by-one somewhere.
+  expect_equal(regexp_find_all("(/+|$)", "aa/b"),
+               list(start = c(3L, 5L), length = c(1L, 0L)))
+
+  ## Little bit of grouping
+  expect_equal(regexp_find_all("(/+|$)", "aa/bbbb//cccc/d"),
+               list(start = c(3, 8, 14, 16L), length = c(1L, 2L, 1L, 0L)))
+  expect_equal(regexp_find_all("(/+)", "aa/bbbb//cccc/d"),
+               list(start = c(3, 8, 14), length = c(1L, 2L, 1L)))
+  expect_equal(regexp_find_all("($)", "aa/bbbb//cccc/d"),
+               list(start = 16L, length = 0L))
+})

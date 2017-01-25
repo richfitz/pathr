@@ -138,3 +138,23 @@ reasonable_path <- function(path) {
     stop("Invalid input for path")
   }
 }
+
+regexp_find_all <- function(re, x) {
+  i <- regexpr(re, x)
+  ## TODO: this *does* need width carried forward with it, because
+  ## when we split the path that's what this is going to work with.
+  if (i > 0L) {
+    len_x <- nchar(x)
+    len_m <- attr(i, "match.length")
+    j <- i + len_m
+    if (j <= len_x) {
+      rest <- regexp_find_all(re, substr(x, j, len_x))
+      list(start = c(i, i + len_m - 1L + rest$start),
+           length = c(len_m, rest$length))
+    } else {
+      list(start = as.integer(i), length = len_m)
+    }
+  } else {
+    list(start = integer(0), length = integer(0))
+  }
+}
