@@ -27,7 +27,11 @@
 ##' @examples
 ##' # path_split_drive(c("c:/Rtools/bin", "\\\\machine\\share\\folder"))
 path_split_drive <- function(path) {
-  windows_split_drive(path) # TODO: this will be changed!
+  if (is_windows()) {
+    windows_path_split_drive(path)
+  } else {
+    posix_path_split_drive(path)
+  }
 }
 
 ## Split a pathname into a drive specification and the rest of the

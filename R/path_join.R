@@ -1,8 +1,8 @@
 path_join <- function(...) {
   if (is_windows()) {
-    posix_path_join(...)
-  } else {
     windows_path_join(...)
+  } else {
+    posix_path_join(...)
   }
 }
 

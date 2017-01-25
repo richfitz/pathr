@@ -101,5 +101,5 @@ path_getsize <- function(files) {
 ## NOTE: this is done with path.expand(), which might not work
 ## correctly on all unix platforms
 path_expand_user <- function(path) {
-  na_skip(path, expand.path)
+  na_skip(path, path.expand)
 }
