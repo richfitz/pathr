@@ -2,3 +2,6 @@
 .Rhistory
 .RData
 py
+src/*.o
+src/*.so
+src/*.dll

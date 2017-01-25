@@ -1,7 +1,13 @@
 PACKAGE := $(shell grep '^Package:' DESCRIPTION | sed -E 's/^Package:[[:space:]]+//')
 RSCRIPT = Rscript --no-init-file
 
-all: install
+all: compile
+
+compile:
+	${RSCRIPT} -e 'library(methods); devtools::compile_dll()'
+
+clean:
+	rm -f src/*.o src/*.so src/*.dll
 
 test:
 	${RSCRIPT} -e 'library(methods); devtools::test()'

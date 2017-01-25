@@ -1,0 +1,2 @@
+##' @useDynLib pathr
+NULL
