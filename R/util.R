@@ -158,3 +158,10 @@ regexp_find_all <- function(re, x) {
     list(start = integer(0), length = integer(0))
   }
 }
+
+strsplit_at <- function(x, br, len) {
+  br1 <- c(0L, br + len)
+  len1 <- c(len, nchar(x))
+  vcapply(seq_along(br1), function(i)
+    substr(x, br1[[i]], br1[[i]] + len1[[i]]))
+}
