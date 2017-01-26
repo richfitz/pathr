@@ -104,10 +104,6 @@ common_prefix <- function(x, y) {
   l1
 }
 
-normcase <- function(x) {
-  tolower(gsub("/", "\\", fixed = TRUE, x))
-}
-
 vlapply <- function(X, FUN, ...) {
   vapply(X, FUN, logical(1), ...)
 }

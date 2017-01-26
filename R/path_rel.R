@@ -1,4 +1,3 @@
-
 ##' Relative filepath from a path to another
 ##'
 ##' Return a relative filepath to another path, either from the current
@@ -65,7 +64,6 @@ win_path_rel <- function(path, start = ".") {
 }
 
 win_path_rel1 <- function(path1, start) {
-
   if (is.na(path1)) return(NA_character_)
 
   sstart <- windows_path_split_drive(start)
@@ -77,7 +75,8 @@ win_path_rel1 <- function(path1, start) {
   path1_drive <- spath1[[1]]
   path1_rest <- spath1[[2]]
 
-  if (normcase(start_drive) != normcase(path1_drive)) {
+  if (windows_path_norm_case(start_drive) !=
+      windows_path_norm_case(path1_drive)) {
     stop(sprintf(
       "path is on mount %s, start on mount %s",
       path1_drive, start_drive
@@ -87,7 +86,8 @@ win_path_rel1 <- function(path1, start) {
   start_list <- drop_empty(strsplit(start_rest, "\\", fixed = TRUE)[[1]])
   path1_list <- drop_empty(strsplit(path1_rest, "\\", fixed = TRUE)[[1]])
 
-  i <- length(common_prefix(normcase(start_list), normcase(path1_list)))
+  i <- length(common_prefix(windows_path_norm_case(start_list),
+                            windows_path_norm_case(path1_list)))
 
   rel_list <- c(
     rep("..", length(start_list) - i),

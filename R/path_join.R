@@ -1,8 +1,8 @@
-path_join <- function(...) {
+path_join <- function(..., collapse = FALSE) {
   if (is_windows()) {
-    windows_path_join(...)
+    windows_path_join(..., collapse = collapse)
   } else {
-    posix_path_join(...)
+    posix_path_join(..., collapse = collapse)
   }
 }
 
@@ -36,10 +36,14 @@ path_join <- function(...) {
 ##   directory for each drive, os.path.join("c:", "foo") represents a
 ##   path relative to the current directory on drive C: (c:foo), not
 ##   c:\foo.
-posix_path_join <- function(...) {
+posix_path_join <- function(..., collapse = FALSE) {
   re_trailing_slash <- "(?<=[^/])/+"
 
   paths <- list(...)
+  if (collapse) {
+    stopifnot(length(paths) == 1L)
+    paths <- paths[[1L]]
+  }
   n <- length(paths)
   len <- lengths(paths)
 
