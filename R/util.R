@@ -48,6 +48,11 @@ is_darwin <- function() {
   Sys.info()[["sysname"]] == "Darwin"
 }
 
+## TODO: fixme for *BSD and Solaris (etc)
+is_linux <- function() {
+  is_posix() && !is_darwin()
+}
+
 ## TODO: Add warn=FALSE as default.
 ## TODO: vectorise.
 file_remove <- function(path, recursive = FALSE) {

@@ -7,7 +7,8 @@ path_list_mount <- function() {
 }
 
 posix_path_list_mount <- function() {
-  .Call("r_posix_path_list_mount", PACKAGE = "pathr")
+  res <- .Call("r_posix_path_list_mount", PACKAGE = "pathr")
+  as.data.frame(res, stringsAsFactors = FALSE)
 }
 
 windows_path_list_mount <- function() {

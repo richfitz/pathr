@@ -21,3 +21,10 @@ const char * scalar_character(SEXP x) {
     return 0;
   }
 }
+
+SEXP alloc_list_element(SEXP list, size_t i, int type, size_t n) {
+  SEXP ret = PROTECT(allocVector(type, n));
+  SET_VECTOR_ELT(list, i, ret);
+  UNPROTECT(1);
+  return ret;
+}
