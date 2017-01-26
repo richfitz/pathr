@@ -14,6 +14,17 @@ posix_path_common_prefix <- function(path) {
     path
   } else {
     ord <- order(path)
+    ## NOTE: This trick will not work when there are multiple slashes
+    ## among paths (e.g., if some paths have 'foo//bar' and others
+    ## have 'foo/bar' as the sort will not work correctly unless all
+    ## files have the same set of duplicated paths.  We could check
+    ## for this (here, it's going to be a case of any(grepl("//",
+    ## path, fixed = TRUE)), though slightly more complicated for the
+    ## windows case.  Another option here would be to normalise the
+    ## paths first, perhaps?
+    ##
+    ## A further option would be to use path_split and collect
+    ## fragments together
     p1 <- path[[which.min(ord)]]
     p2 <- path[[which.max(ord)]]
     if (p1 == p2) {
