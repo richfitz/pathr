@@ -12,3 +12,12 @@ bool scalar_logical(SEXP x) {
     return 0;
   }
 }
+
+const char * scalar_character(SEXP x) {
+  if (TYPEOF(x) == STRSXP && LENGTH(x) == 1) {
+    return CHAR(STRING_ELT(x, 0));
+  } else {
+    Rf_error("Expected a character scalar");
+    return 0;
+  }
+}

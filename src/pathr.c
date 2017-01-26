@@ -47,3 +47,27 @@ int posix_is_mount1(const char * path, bool absent_is_false) {
 
   return buf.st_dev != buf_up.st_dev || buf.st_ino == buf_up.st_ino;
 }
+
+SEXP r_posix_path_same_file(SEXP r_path1, SEXP r_path2,
+                            SEXP r_follow_links, SEXP r_absent_is_false) {
+  bool
+    follow_links = scalar_logical(r_follow_links),
+    absent_is_false = scalar_logical(r_absent_is_false);
+  const char
+    *path1 = scalar_character(r_path1),
+    *path2 = scalar_character(r_path2);
+  struct stat st1, st2;
+  bool ok;
+  if (follow_links) {
+    ok = stat(path1, &st1) == 0 && stat(path2, &st2) == 0;
+  } else {
+    ok = lstat(path1, &st1) == 0 && lstat(path2, &st2) == 0;
+  }
+  int ret;
+  if (ok) {
+    ret = st1.st_ino == st2.st_ino && st1.st_dev == st2.st_dev;
+  } else {
+    ret = absent_is_false ? 0 : NA_INTEGER;
+  }
+  return ScalarLogical(ret);
+}
