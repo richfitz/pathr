@@ -18,8 +18,8 @@ The names here (immediately by the checkboxes) are the python names for the func
 * [ ] `samefile`
 * [ ] `sameopenfile`
 * [ ] `samestat`
-* [ ] `split`
-* [ ] `splitext`
+* [ ] `split` - as `path_split` (windows version to come)
+* [x] `splitext` - as `path_split_ext`
 * [ ] `splitunc`
 * [ ] `walk` (deprecated in python3 in favour of os.walk)
 * [x] `abspath` - as `path_abs`
