@@ -16,3 +16,17 @@ skip_if_not_windows <- function() {
   }
   skip("this test needs to be run on a Windows platform")
 }
+
+skip_if_no_symlink <- function() {
+  ## TODO: better to make this a constant in the package, probably
+  if (!is_windows()) {
+    return()
+  }
+  skip("this test needs symlink support")
+}
+
+with_wd <- function(path, expr) {
+  owd <- setwd(path)
+  on.exit(setwd(owd))
+  expr
+}
