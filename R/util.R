@@ -160,6 +160,16 @@ regexp_find_all <- function(re, x) {
   }
 }
 
+regexpr_find_after <- function(re, x, start) {
+  start <- max(start, 0L)
+  len <- nchar(x)
+  x_end <- substr(x, start + 1L, len)
+  i <- regexpr(re, x_end)
+  j <- i > 0
+  i[j] <- i[j] + start
+  i
+}
+
 strsplit_at <- function(x, start, length) {
   xx <- rep_len(x, length(start) + 1L)
   substr(xx, c(0L, start + length), c(length, nchar(x)))
