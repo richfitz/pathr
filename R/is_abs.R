@@ -12,7 +12,7 @@
 ##' path_is_abs(c("/foo/bar/", "./relative", "../me/too", "and/me"))
 path_is_abs <- function(path) {
   if (is_windows()) {
-    win_path_is_abs(path)
+    windows_path_is_abs(path)
   } else {
     posix_path_is_abs(path)
   }
@@ -20,7 +20,7 @@ path_is_abs <- function(path) {
 
 #' @importFrom rematch re_match
 
-win_path_is_abs <- function(path) {
+windows_path_is_abs <- function(path) {
   device_re <- paste0(
     "^([a-zA-Z]:|",
     "[\\\\\\/]{2}[^\\\\\\/]+[\\\\\\/]+[^\\\\\\/]+)?",
