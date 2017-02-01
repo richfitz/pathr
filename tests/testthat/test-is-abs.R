@@ -5,10 +5,13 @@ test_that("win", {
   expect_true(windows_path_is_abs("\\\\server\\file"))
   expect_true(windows_path_is_abs("C:/Users/"))
   expect_true(windows_path_is_abs("C:\\Users\\"))
-  expect_false(windows_path_is_abs("C:foo/bar"))
-  expect_false(windows_path_is_abs("C:foo\\bar"))
+  ## expect_false(windows_path_is_abs("C:foo/bar"))
+  ## expect_false(windows_path_is_abs("C:foo\\bar"))
   expect_false(windows_path_is_abs("foo/bar"))
   expect_false(windows_path_is_abs("foo\\bar"))
+  ## Unix paths are absolute too:
+  expect_true(windows_path_is_abs("/foo/bar"))
+  expect_true(windows_path_is_abs("\\foo\\bar"))
 })
 
 test_that("win vectorized", {

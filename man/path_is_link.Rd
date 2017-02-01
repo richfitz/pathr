@@ -4,10 +4,10 @@
 \alias{path_is_link}
 \title{Test for symlink}
 \usage{
-path_is_link(paths)
+path_is_link(path, absent_is_false = TRUE)
 }
 \arguments{
-\item{paths}{Paths to test}
+\item{path}{Paths to test}
 }
 \value{
 Logical vector.

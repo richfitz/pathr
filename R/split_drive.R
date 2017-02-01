@@ -2,9 +2,12 @@
 ##'
 ##' Returns a 2 element list with character vectors: drive/UNC and
 ##' path, either part may contain empty strings ("") but both will
-##' have the same length as th input.
+##' have the same length as the input.
 ##'
-##' It always holds that \code{paste0(output[1], output[2]) == input}.
+##' It always holds that \code{paste0(output[1], output[2]) == input}
+##' (note that this means that the path part is an \emph{absolute}
+##' path, including a leading slash, when a drive or UNC mountpoint is
+##' present).
 ##'
 ##' If the path contained a drive letter, the drive/UNC part will contain
 ##' everything up to and including the colon. E.g.
@@ -17,6 +20,9 @@
 ##' \code{list(drive = "//host/computer", path = "/dir")}.
 ##'
 ##' Paths cannot contain both a drive letter and a UNC path.
+##'
+##' Note that this differs from the Python \code{os.path} module in
+##' that UNC parts are considered drives here.
 ##'
 ##' @param path Character vector.
 ##' @return List of character vectors of length two. The first elements
@@ -38,11 +44,13 @@ path_split_drive <- function(path) {
 ## path.  Useful on DOS/Windows/NT; on Unix, the drive is always
 ## empty.
 posix_path_split_drive <- function(path) {
-  list(drive = na_skip(path, function(x) rep("", length(x))),
+  list(drive = na_skip(path, function(x) rep_len("", length(x))),
        path = na_skip(path, identity))
 }
 
 windows_path_split_drive <- function(path) {
+  ## TODO: make it optional that unc paths are considered drives?
+  ## That would make the treatment of this easier...
   npath <- gsub("/", "\\", path, fixed = TRUE)
 
   drive <- subpath <- character(length(path))

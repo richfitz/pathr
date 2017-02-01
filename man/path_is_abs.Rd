@@ -14,8 +14,8 @@ Logical vector.
 }
 \description{
 On Unix, that means it begins with a slash, on Windows that it
-begins with a (back)slash after chopping off a potential drive letter.
-On Windows UNC paths are consideted to be absolute paths.
+begins with a (back)slash after chopping off a potential drive
+letter.  On Windows, UNC paths are considered to be absolute paths.
 }
 \examples{
 path_is_abs(c("/foo/bar/", "./relative", "../me/too", "and/me"))
