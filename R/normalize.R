@@ -34,9 +34,8 @@ posix_path_norm <- function(path) {
 }
 
 posix_path_norm1 <- function(path1) {
-
-  if (path1 == "") return(".")
   if (is.na(path1)) return(NA_character_)
+  if (path1 == "") return(".")
 
   initial_slashes <- as.integer(startswith(path1, "/"))
 
@@ -75,6 +74,7 @@ posix_path_norm1 <- function(path1) {
 
 
 win_path_norm1 <- function(path1) {
+  if (is.na(path1)) return(NA_character_)
 
   ## in the case of paths with these prefixes:
   ## \\.\ -> device names

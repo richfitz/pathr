@@ -1,7 +1,6 @@
 context("path_rel")
 
 test_that("posix_path_rel", {
-
   curdir <- basename(getwd())
 
   cases <- list(
@@ -30,8 +29,7 @@ test_that("posix_path_rel", {
   }
 })
 
-test_that("win_path_rel", {
-
+test_that("windows_path_rel", {
   curdir <- basename(getwd())
 
   cases <- list(
@@ -64,7 +62,7 @@ test_that("win_path_rel", {
     with_mock(
       `base::getwd` = function() wd,
       `pathr::is_windows` = function() TRUE,
-      expect_equal(do.call(win_path_rel, as.list(case[[1]])), case[[2]])
+      expect_equal(do.call(windows_path_rel, as.list(case[[1]])), case[[2]])
     )
   }
 })

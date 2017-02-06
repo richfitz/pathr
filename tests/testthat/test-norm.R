@@ -51,3 +51,12 @@ test_that("win_path_norm", {
   })
 
 })
+
+test_that("missing values", {
+  with_mock(
+    `pathr::is_windows` = function() TRUE,
+    expect_equal(win_path_norm(NA_character_), NA_character_))
+  with_mock(
+    `pathr::is_windows` = function() FALSE,
+    expect_equal(win_path_norm(NA_character_), NA_character_))
+})

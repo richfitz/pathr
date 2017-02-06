@@ -174,3 +174,13 @@ strsplit_at <- function(x, start, length) {
   xx <- rep_len(x, length(start) + 1L)
   substr(xx, c(0L, start + length), c(length, nchar(x)))
 }
+
+stop_wrong_platform <- function(operation, required, current) {
+  ## TODO: This can be cleaned up at some point; inject this in places
+  ## where this is useful and then see if it can be replaced with
+  ## something that needs only two args (i.e., is it always windows vs
+  ## posix).  Given how little needs darwin testing I'd think that
+  ## will be the case.
+  stop(sprintf("'%s' requires platform '%s', not '%s'",
+               operation, required, current))
+}
